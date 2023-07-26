@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newsapi/Model/Article.dart';
+import 'package:newsapi/services/ApiService.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +25,15 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('News API')),
-      body: Text('hello news'),
+      body: FutureBuilder(
+        future: ApiService().getArticles(),
+        builder: (BuildContext context, AsyncSnapshot<List<Article>> snapshot){
+          if(snapshot.hasData){
+            return Text('hurreee');
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 }
