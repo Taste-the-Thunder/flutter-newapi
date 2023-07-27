@@ -3,6 +3,8 @@ import 'package:newsapi/Model/Article.dart';
 import 'package:newsapi/services/ApiService.dart';
 import 'package:newsapi/widgets/NewsCardWidget.dart';
 
+import 'NewsDescriptionPage.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -33,7 +35,18 @@ class MyHomePage extends StatelessWidget {
             return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, index){
-                  return NewsCardWidget(article: snapshot.data![index]);
+                  return InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context)=> NewsDescriptionPage(article:snapshot.data![index] ,),
+                          )
+                      );
+                    },
+                      child: NewsCardWidget(
+                          article: snapshot.data![index])
+                  );
                 }
             );
           }
