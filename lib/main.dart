@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newsapi/Model/Article.dart';
 import 'package:newsapi/services/ApiService.dart';
+import 'package:newsapi/widgets/NewsCardWidget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,13 +33,7 @@ class MyHomePage extends StatelessWidget {
             return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, index){
-                  return Card(
-                    elevation: 5,
-                    child: ListTile(
-                      title: Text('${snapshot.data![index].title}'),
-                      subtitle: Text('${snapshot.data![index].description}'),
-                    ),
-                  );
+                  return NewsCardWidget(article: snapshot.data![index]);
                 }
             );
           }
