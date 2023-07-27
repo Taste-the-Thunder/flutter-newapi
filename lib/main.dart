@@ -29,7 +29,18 @@ class MyHomePage extends StatelessWidget {
         future: ApiService().getArticles(),
         builder: (BuildContext context, AsyncSnapshot<List<Article>> snapshot){
           if(snapshot.hasData){
-            return Text('hurreee');
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (BuildContext context, index){
+                  return Card(
+                    elevation: 5,
+                    child: ListTile(
+                      title: Text('${snapshot.data![index].title}'),
+                      subtitle: Text('${snapshot.data![index].description}'),
+                    ),
+                  );
+                }
+            );
           }
           return Center(child: CircularProgressIndicator());
         },
